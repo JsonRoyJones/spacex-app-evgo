@@ -11,6 +11,9 @@ const LAUNCHES_QUERY = gql`
       launch_year
       launch_date_local
       launch_success
+      rocket {
+        rocket_name
+      }
       links {
         video_link
       }
@@ -41,7 +44,7 @@ export default function Launches() {
   return (
     <>
       <br />
-      <div className="card border-secondary mb-3">
+      <div className="card border-secondary">
         <h2 className="card-header m-3">Launches</h2>
         <h6 className="card-text m-3">
           Use the search bar below to search for SpaceX launches. You may search

@@ -7,15 +7,16 @@ const LaunchItem = ({
   launch: {
     flight_number,
     mission_name,
+    rocket: { rocket_name },
     launch_date_local,
     links: { video_link },
     launch_success
   }
 }) => {
-  console.log(video_link);
+  console.log(rocket_name);
   const handleVidClick = () => {
     console.log("in handler");
-    window.open(video_link, "_blank");
+    if (video_link != null) window.open(video_link, "_blank");
   };
   return (
     <div className="card card-body mb-3">
@@ -33,28 +34,31 @@ const LaunchItem = ({
               {mission_name}{" "}
             </span>
           </h4>
-          <p>
+          <p className="m-0">
             Launch Date:{" "}
             <Moment format="YYYY-MM-DD HH:mm">{launch_date_local}</Moment>
           </p>
+          <p className="m-0">Rocket Name: {rocket_name}</p>
         </div>
-        <div className="col-m-3">
-          <div
-            className={`btn btn-secondary btn-sm ${
-              video_link !== null ? "" : "disabled"
-            }`}
-            onClick={handleVidClick}
-          >
-            Video Link
+        <div className="row ml-0">
+          <div className="col-m-3">
+            <div
+              className={`btn btn-secondary btn-sm ${
+                video_link !== null ? "" : "disabled"
+              }`}
+              onClick={handleVidClick}
+            >
+              Video Link
+            </div>
           </div>
-        </div>
-        <div className="col-m-3">
-          <Link
-            to={`/launch/${flight_number}`}
-            className="btn btn-secondary btn-sm"
-          >
-            More Info
-          </Link>
+          <div className="col-m-3">
+            <Link
+              to={`/launch/${flight_number}`}
+              className="btn btn-secondary btn-sm"
+            >
+              More Info
+            </Link>
+          </div>
         </div>
       </div>
     </div>
