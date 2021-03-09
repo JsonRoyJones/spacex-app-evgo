@@ -8,8 +8,12 @@ const LAUNCHES_QUERY = gql`
     launches {
       flight_number
       mission_name
+      launch_year
       launch_date_local
       launch_success
+      links {
+        video_link
+      }
     }
   }
 `;
@@ -36,7 +40,16 @@ function LaunchesQuery() {
 export default function Launches() {
   return (
     <>
-      <h1 className="display-4 my-3">Launches</h1>
+      <br />
+      <div className="card border-secondary mb-3">
+        <h2 className="card-header m-3">Launches</h2>
+        <h6 className="card-text m-3">
+          Use the search bar below to search for SpaceX launches. You may search
+          by Mission, Rocket, or Launch Year.
+        </h6>
+        <div className="search-container m-3">// Search Component</div>
+      </div>
+      <br />
       <MissionKey />
       <LaunchesQuery />
     </>
