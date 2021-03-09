@@ -16,6 +16,7 @@ const LaunchType = new GraphQLObjectType({
     mission_name: { type: GraphQLString },
     launch_year: { type: GraphQLString },
     launch_date_local: { type: GraphQLString },
+    links: { type: LinkType },
     launch_success: { type: GraphQLBoolean },
     rocket: { type: RocketType }
   })
@@ -31,13 +32,11 @@ const RocketType = new GraphQLObjectType({
   })
 });
 
-// Mission Type
-const MissionType = new GraphQLObjectType({
-  name: "Mission",
+// Link Type
+const LinkType = new GraphQLObjectType({
+  name: "Link",
   fields: () => ({
-    mission_id: { type: GraphQLString },
-    mission_name: { type: GraphQLString },
-    website: { type: GraphQLString }
+    video_link: { type: GraphQLString }
   })
 });
 
@@ -83,23 +82,51 @@ const RootQuery = new GraphQLObjectType({
           .then(res => res.data);
       }
     },
-    missions: {
-      type: new GraphQLList(MissionType),
-      resolve(parent, args) {
-        return axios
-          .get("https://api.spacexdata.com/v3/missions")
-          .then(res => res.data);
-      }
-    },
-    mission: {
-      type: MissionType,
+    missionLaunches: {
+      type: new GraphQLList(LaunchType),
       args: {
         mission_name: { type: GraphQLString }
       },
       resolve(parent, args) {
         return axios
-          .get(`https://api.spacexdata.com/v3/missions/${args.mission_name}`)
-          .then(res => res.data);
+          .get(`https://api.spacexdata.com/v3/launches`)
+          .then(res =>
+            res.data.filter(launchItem =>
+              launchItem.mission_name
+                .toLowerCase()
+                .includes(args.mission_name.toLowerCase())
+            )
+          );
+      }
+    },
+    rocketLaunches: {
+      type: new GraphQLList(LaunchType),
+      args: {
+        rocket_name: { type: GraphQLString }
+      },
+      resolve(parent, args) {
+        return axios
+          .get(`https://api.spacexdata.com/v3/launches`)
+          .then(res =>
+            res.data.filter(launchItem =>
+              launchItem.rocket.rocket_name.includes(args.rocket_name)
+            )
+          );
+      }
+    },
+    yearLaunches: {
+      type: new GraphQLList(LaunchType),
+      args: {
+        launch_year: { type: GraphQLInt }
+      },
+      resolve(parent, args) {
+        return axios
+          .get(`https://api.spacexdata.com/v3/launches`)
+          .then(res =>
+            res.data.filter(
+              launchItem => launchItem.launch_year == args.launch_year
+            )
+          );
       }
     }
   }
