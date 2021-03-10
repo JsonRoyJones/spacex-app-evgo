@@ -1,9 +1,9 @@
-import React, { useState } from "react";
 import Select from "react-select";
 
 export default function YearSelect({ years, handleYearFilter }) {
   const handleSecondOption = e => {
-    handleYearFilter(e);
+    const yearNum = Number(e.value);
+    handleYearFilter(yearNum);
   };
 
   const yearOptions = years.map(year => {
@@ -17,7 +17,7 @@ export default function YearSelect({ years, handleYearFilter }) {
       className="basic-single"
       classNamePrefix="select"
       options={yearOptions}
-      onChange={e => handleSecondOption(e ? e.value : "")}
+      onChange={e => handleSecondOption(e ? e : "")}
     />
   );
 }

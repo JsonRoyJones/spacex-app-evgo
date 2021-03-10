@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import LaunchItem from "./LaunchItem";
-import LAUNCHES_QUERY from "../queries/LAUNCHES_QUERY";
-import YEAR_QUERY from "../queries/YEAR_QUERY";
+import React from "react";
+import LaunchesAll from "./LaunchesAll";
+import YearLaunches from "./YearLaunches";
 
-export default function LaunchesQuery(
+export default function LaunchesContainer(
   {
     currentQuery,
     handleQueryChange,
@@ -16,56 +14,37 @@ export default function LaunchesQuery(
   },
   props
 ) {
-  const [gqlQuery, setGqlQuery] = useState(LAUNCHES_QUERY);
-  const [launchArr, setLaunchArr] = useState([]);
-  let launchData = [];
-  useEffect(() => {
-    if (launchArr.length < launchData.length) {
-      setLaunchArr(launchData);
-    }
-    if (currentQuery === "launches") {
-      setGqlQuery(LAUNCHES_QUERY);
-    } else if (currentQuery === "launch_year") {
-      // build query handler
-      console.log("in useeffect", YEAR_QUERY);
-    } else {
-      console.log(currentQuery);
-    }
-  });
-
-  const { loading, error, data } = useQuery(gqlQuery);
-
-  if (loading)
+  if (currentQuery === "launch_year" && yearFilter !== 0) {
     return (
-      <div className="loading">
-        <h4>Launches Loading...</h4>
-      </div>
-    );
-  if (error) return <p>Something went wrong, please try again.</p>;
-  if (data) {
-    // only update this on initial page load to set options for dropdown
-    if (years.length < 1) {
-      handleYears(
-        data.launches.map(launch => {
-          return launch.launch_year;
-        })
-      );
-    }
-    if (rockets.length < 1) {
-      handleRockets(
-        data.launches.map(launch => {
-          return launch.rocket.rocket_name;
-        })
-      );
-    }
-    launchData = data.launches.map(launch => (
-      <LaunchItem
-        key={launch.mission_name + launch.flight_number}
-        launch={launch}
+      <YearLaunches
+        currentQuery={currentQuery}
+        handleQueryChange={handleQueryChange}
+        years={years}
+        yearFilter={yearFilter}
+        handleYears={handleYears}
+        rockets={rockets}
+        handleRockets={handleRockets}
       />
-    ));
-    return launchArr;
+    );
   } else {
-    return null;
+    return [
+      <LaunchesAll
+        currentQuery={currentQuery}
+        handleQueryChange={handleQueryChange}
+        years={years}
+        yearFilter={yearFilter}
+        handleYears={handleYears}
+        rockets={rockets}
+        handleRockets={handleRockets}
+      />
+    ];
   }
+
+  // return (
+  //   <div>
+  //     // render initial component for LaunchesAll default but if year or rocket
+  //     selected, render a different component
+  //     <LaunchesContainer />
+  //   </div>
+  // );
 }

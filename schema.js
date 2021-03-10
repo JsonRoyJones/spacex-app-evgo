@@ -126,7 +126,8 @@ const RootQuery = new GraphQLObjectType({
             res.data.filter(
               launchItem => launchItem.launch_year == args.launch_year
             )
-          );
+          )
+          .catch(error => console.log(error));
       }
     }
   }

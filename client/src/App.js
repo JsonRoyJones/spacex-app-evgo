@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
-import Launches from "./components/Launches";
+import Home from "./components/Home";
 import Launch from "./components/Launch";
 import spacexlogo from "./spacexlogo.png";
 
@@ -23,7 +23,7 @@ function App() {
           </div>
           <br />
           <hr />
-          <Route exact path="/" component={Launches} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/launch/:flight_number" component={Launch} />
         </div>
       </Router>
