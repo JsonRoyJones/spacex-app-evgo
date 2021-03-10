@@ -8,7 +8,7 @@ export default function LaunchesAll({ yearFilter }) {
   let launchData = [];
 
   useEffect(() => {
-    if (launchArr.length < launchData.length) {
+    if (launchArr.length !== launchData.length) {
       setLaunchArr(launchData);
     }
   });

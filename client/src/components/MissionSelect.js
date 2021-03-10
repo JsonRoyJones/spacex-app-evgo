@@ -10,10 +10,15 @@ export default function MissionSelect() {
   return (
     <>
       <input
-        style={{ width: "auto" }}
+        style={{
+          width: "100%",
+          borderColor: "silver",
+          borderRadius: "4px",
+          borderWidth: "1px"
+        }}
         className="form-control"
         type="search"
-        placeholder="Select 1 from above"
+        placeholder="Type a portion of Mission name to find relevant launches"
         value={inputVal}
         onChange={onChange}
       />
