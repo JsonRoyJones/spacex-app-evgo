@@ -1,58 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
-import LaunchItem from "../components/LaunchItem";
-
-const LAUNCHES_QUERY = gql`
-  query LaunchesQuery {
-    launches {
-      flight_number
-      mission_name
-      launch_year
-      launch_date_local
-      launch_success
-      rocket {
-        rocket_name
-      }
-      links {
-        video_link
-      }
-    }
-  }
-`;
-
-const LAUNCH_QUERY = gql`
-  query LaunchQuery($flight_number: Int!) {
-    launch(flight_number: $flight_number) {
-      flight_number
-      mission_name
-      launch_year
-      launch_success
-      launch_date_local
-      rocket {
-        rocket_id
-        rocket_name
-        rocket_type
-      }
-    }
-  }
-`;
-
-const YEAR_QUERY = gql`
-  query yearLaunches($launch_year: Int!) {
-    flight_number
-    mission_name
-    rocket {
-      rocket_name
-    }
-    launch_year
-    launch_date_local
-    launch_success
-    links {
-      video_link
-    }
-  }
-`;
+import LaunchItem from "./LaunchItem";
+import LAUNCHES_QUERY from "../queries/LAUNCHES_QUERY";
+import YEAR_QUERY from "../queries/YEAR_QUERY";
 
 export default function LaunchesQuery(
   {
@@ -77,23 +27,11 @@ export default function LaunchesQuery(
       setGqlQuery(LAUNCHES_QUERY);
     } else if (currentQuery === "launch_year") {
       // build query handler
-      setGqlQuery(YEAR_QUERY, {
-        variables: {
-          year: yearFilter
-        }
-      });
-
-      // setLaunchArr();
       console.log("in useeffect", YEAR_QUERY);
     } else {
       console.log(currentQuery);
     }
-  }, [currentQuery, launchData]);
-
-  // next query here for searching by Mission
-  // next query here for searching by Rocket
-  // next query here for searching by Year
-  // determine query and change options here
+  });
 
   const { loading, error, data } = useQuery(gqlQuery);
 
@@ -105,6 +43,7 @@ export default function LaunchesQuery(
     );
   if (error) return <p>Something went wrong, please try again.</p>;
   if (data) {
+    // only update this on initial page load to set options for dropdown
     if (years.length < 1) {
       handleYears(
         data.launches.map(launch => {

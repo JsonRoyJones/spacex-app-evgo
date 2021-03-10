@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import LaunchesQuery from "../queries/LaunchesQuery";
+import LaunchesContainer from "./LaunchesContainer";
 import MissionKey from "./MissionKey";
 import SearchContainer from "./SearchContainer";
 
@@ -57,7 +57,7 @@ export default function Launches() {
       </div>
       <br />
       <MissionKey />
-      <LaunchesQuery
+      <LaunchesContainer
         currentQuery={currentQuery}
         handleQueryChange={handleQueryChange}
         years={years}
