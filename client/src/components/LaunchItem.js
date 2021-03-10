@@ -13,9 +13,7 @@ const LaunchItem = ({
     launch_success
   }
 }) => {
-  console.log(rocket_name);
   const handleVidClick = () => {
-    console.log("in handler");
     if (video_link != null) window.open(video_link, "_blank");
   };
   return (
