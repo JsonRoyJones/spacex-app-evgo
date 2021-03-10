@@ -3,14 +3,26 @@ import MissionSelect from "./MissionSelect";
 import YearSelect from "./YearSelect";
 import RocketSelect from "./RocketSelect";
 
-const SecondSearch = ({ searchOption, years, rockets }) => {
+const SecondSearch = ({
+  searchOption,
+  years,
+  yearFilter,
+  handleYearFilter,
+  rockets
+}) => {
   const [secondSearchMenu, setSecondSearchMenu] = useState("");
 
   useEffect(() => {
     if (searchOption === "" || searchOption === "mission_name") {
       setSecondSearchMenu(<MissionSelect />);
     } else if (searchOption === "launch_year") {
-      setSecondSearchMenu(<YearSelect years={years} />);
+      setSecondSearchMenu(
+        <YearSelect
+          years={years}
+          yearFilter={yearFilter}
+          handleYearFilter={handleYearFilter}
+        />
+      );
     } else {
       // set second search menu with Rocket Select
       setSecondSearchMenu(<RocketSelect rockets={rockets} />);

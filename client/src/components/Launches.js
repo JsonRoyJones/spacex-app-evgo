@@ -6,6 +6,7 @@ import SearchContainer from "./SearchContainer";
 export default function Launches() {
   const [currentQuery, setQuery] = useState("launches");
   const [years, setYears] = useState([]);
+  const [yearFilter, setYearFilter] = useState(0);
   const [rockets, setRockets] = useState([]);
 
   const handleYears = yearArr => {
@@ -13,14 +14,22 @@ export default function Launches() {
     setYears([...yearSet]);
   };
 
+  const handleYearFilter = yearSelected => {
+    setYearFilter(yearSelected);
+  };
+
   const handleRockets = rocketArr => {
     const rocketSet = new Set(rocketArr);
     setRockets([...rocketSet]);
   };
 
-  const toggleQuery = query => {
-    console.log("settingQuery with: ", query);
+  const handleQueryChange = query => {
     setQuery(query);
+    console.log("settingQuery with: ", currentQuery);
+    // let { launch_year } = props.match.params;
+    // console.log("in handler for querychange", launch_year);
+    // launch_year = parseInt(launch_year);
+    // setGqlQuery();
   };
   return (
     <>
@@ -31,10 +40,15 @@ export default function Launches() {
           Use the search bar below to search for SpaceX launches. You may search
           by Mission, Rocket, or Launch Year.
         </h6>
+        <p className="ml-3">
+          Alternatively, you may scroll through all launches below.
+        </p>
         <div className="search-container m-3">
           <SearchContainer
-            toggleQuery={toggleQuery}
+            handleQueryChange={handleQueryChange}
             years={years}
+            yearFilter={yearFilter}
+            handleYearFilter={handleYearFilter}
             handleYears={handleYears}
             rockets={rockets}
             handleRockets={handleRockets}
@@ -45,8 +59,9 @@ export default function Launches() {
       <MissionKey />
       <LaunchesQuery
         currentQuery={currentQuery}
-        toggleQuery={toggleQuery}
+        handleQueryChange={handleQueryChange}
         years={years}
+        yearFilter={yearFilter}
         handleYears={handleYears}
         rockets={rockets}
         handleRockets={handleRockets}

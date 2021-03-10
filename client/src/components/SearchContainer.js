@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import SecondSearch from "./SecondSearch";
 import Select from "react-select";
 
-const SearchContainer = ({ toggleQuery, years, rockets }) => {
-  // this tells us React which component to load on condition of search category
+const SearchContainer = ({
+  handleQueryChange,
+  years,
+  yearFilter,
+  handleYearFilter,
+  rockets
+}) => {
   const [searchOption, setSearchOption] = useState("");
   const [isDisabled, setDisabled] = useState(true);
 
@@ -13,15 +18,16 @@ const SearchContainer = ({ toggleQuery, years, rockets }) => {
     { value: "launch_year", label: "Launch Year" }
   ];
 
+  // this tells React which component to load on condition of search category
   const handleFirstOption = val => {
     setSearchOption(val);
     if (val === "") {
       setDisabled(true);
-      toggleQuery("launches");
+      handleQueryChange("launches");
     } else {
       setDisabled(false);
       console.log("searchcontainer", val);
-      toggleQuery(searchOption);
+      handleQueryChange(val);
     }
   };
 
@@ -45,6 +51,8 @@ const SearchContainer = ({ toggleQuery, years, rockets }) => {
             <SecondSearch
               searchOption={searchOption}
               years={years}
+              yearFilter={yearFilter}
+              handleYearFilter={handleYearFilter}
               rockets={rockets}
             />
           </div>

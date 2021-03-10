@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { gql } from "apollo-boost";
-import { useQuery, useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import LaunchItem from "../components/LaunchItem";
 
 const LAUNCHES_QUERY = gql`
@@ -55,28 +55,40 @@ const YEAR_QUERY = gql`
 `;
 
 export default function LaunchesQuery(
-  { currentQuery, years, handleYears, rockets, handleRockets },
+  {
+    currentQuery,
+    handleQueryChange,
+    years,
+    handleYears,
+    rockets,
+    handleRockets,
+    yearFilter
+  },
   props
 ) {
   const [gqlQuery, setGqlQuery] = useState(LAUNCHES_QUERY);
-
-  const handleQueryChange = qType => {
-    let { launch_year } = props.match.params;
-    console.log("in handler for querychange", launch_year);
-    launch_year = parseInt(launch_year);
-    setGqlQuery();
-  };
-
+  const [launchArr, setLaunchArr] = useState([]);
+  let launchData = [];
   useEffect(() => {
+    if (launchArr.length < launchData.length) {
+      setLaunchArr(launchData);
+    }
     if (currentQuery === "launches") {
       setGqlQuery(LAUNCHES_QUERY);
-    } else if (currentQuery === "yearLaunches") {
+    } else if (currentQuery === "launch_year") {
       // build query handler
-      handleQueryChange("year");
+      setGqlQuery(YEAR_QUERY, {
+        variables: {
+          year: yearFilter
+        }
+      });
 
-      console.log("in useeffect");
+      // setLaunchArr();
+      console.log("in useeffect", YEAR_QUERY);
+    } else {
+      console.log(currentQuery);
     }
-  }, [currentQuery]);
+  }, [currentQuery, launchData]);
 
   // next query here for searching by Mission
   // next query here for searching by Rocket
@@ -107,12 +119,13 @@ export default function LaunchesQuery(
         })
       );
     }
-    return data.launches.map(launch => (
+    launchData = data.launches.map(launch => (
       <LaunchItem
         key={launch.mission_name + launch.flight_number}
         launch={launch}
       />
     ));
+    return launchArr;
   } else {
     return null;
   }

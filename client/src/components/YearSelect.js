@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-export default function YearSelect({ years }) {
-  const [selectedOption, setSelectedOption] = useState("");
-
+export default function YearSelect({ years, handleYearFilter }) {
   const handleSecondOption = e => {
-    setSelectedOption(e);
+    handleYearFilter(e);
   };
 
   const yearOptions = years.map(year => {
