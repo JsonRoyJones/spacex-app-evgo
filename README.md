@@ -17,6 +17,7 @@ In your terminal, navigate to the directory in which you wish to place this fold
 ```bash
 git clone https://github.com/JsonRoyJones/spacex-app-evgo
 ```
+(note that if you forked this repo, your username would be in place of mine)
 
 ## Get up and running (locally)
 
