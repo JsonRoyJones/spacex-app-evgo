@@ -1,5 +1,6 @@
 import { gql } from "apollo-boost";
 
+// This query allows a user to search by launch year, results returned will match only the given launch_year
 export default gql`
   query YearQuery($launch_year: Int!) {
     yearLaunches(launch_year: $launch_year) {

@@ -1,5 +1,6 @@
 import { gql } from "apollo-boost";
 
+// This query is used for returning all launches on initial page load
 export default gql`
   query LaunchesQuery {
     launches {
