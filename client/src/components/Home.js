@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import LaunchesContainer from "./LaunchesContainer";
 import MissionKey from "./MissionKey";
 import SearchContainer from "./SearchContainer";
@@ -32,7 +32,6 @@ export default function Launches() {
 
   const handleMissionFilter = mission => {
     setMissionFilter(mission);
-    console.log(mission);
   };
 
   const handleSearchClicked = () => {

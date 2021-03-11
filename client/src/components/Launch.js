@@ -15,8 +15,6 @@ const Launch = props => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong. Please try again.</p>;
 
-  console.log(data);
-
   const {
     mission_name,
     launch_year,

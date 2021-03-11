@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import LaunchItem from "./LaunchItem";
 import MISSION_QUERY from "../queries/MISSION_QUERY";
 
@@ -30,11 +30,9 @@ export default function MissionLaunches({ missionFilter, searchClicked }) {
       </div>
     );
   if (error) {
-    console.log(error);
     return <p>Something went wrong, please try again.</p>;
   }
   if (data && data.missionLaunches.length > 0) {
-    console.log(data);
     launchData = data.missionLaunches.map(launch => (
       <LaunchItem
         key={launch.mission_name + launch.flight_number}

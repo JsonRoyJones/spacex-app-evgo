@@ -18,8 +18,6 @@ export default function LaunchesAll({ rocketFilter }) {
       rocket_name: rocketFilter
     }
   });
-  console.log(typeof rocketFilter, ": ", rocketFilter);
-  console.log(ROCKET_QUERY);
   if (loading)
     return (
       <div className="loading">
@@ -27,12 +25,9 @@ export default function LaunchesAll({ rocketFilter }) {
       </div>
     );
   if (error) {
-    console.log(error);
-    console.log(rocketFilter);
     return <p>Something went wrong, please try again.</p>;
   }
   if (data) {
-    console.log(data);
     launchData = data.rocketLaunches.map(launch => (
       <LaunchItem
         key={launch.mission_name + launch.flight_number}

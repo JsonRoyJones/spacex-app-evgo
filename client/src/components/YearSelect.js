@@ -10,7 +10,6 @@ export default function YearSelect({ years, handleYearFilter }) {
     return { value: year, label: year };
   });
 
-  console.log(yearOptions);
   return (
     <Select
       autosize={false}

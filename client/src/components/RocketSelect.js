@@ -13,7 +13,6 @@ export default function RocketSelect({ rockets, handleRocketFilter }) {
     return { value: rocket, label: rocket };
   });
 
-  console.log(rocketOptions);
   return (
     <Select
       autosize={false}

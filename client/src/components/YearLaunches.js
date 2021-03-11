@@ -12,14 +12,11 @@ export default function LaunchesAll({ yearFilter }) {
       setLaunchArr(launchData);
     }
   });
-  console.log(typeof yearFilter, ": ", yearFilter);
   const { loading, error, data } = useQuery(YEAR_QUERY, {
     variables: {
       launch_year: yearFilter
     }
   });
-  console.log(typeof yearFilter, ": ", yearFilter);
-  console.log(YEAR_QUERY);
   if (loading)
     return (
       <div className="loading">
@@ -27,11 +24,9 @@ export default function LaunchesAll({ yearFilter }) {
       </div>
     );
   if (error) {
-    console.log(error);
     return <p>Something went wrong, please try again.</p>;
   }
   if (data) {
-    console.log(data);
     launchData = data.yearLaunches.map(launch => (
       <LaunchItem
         key={launch.mission_name + launch.flight_number}
