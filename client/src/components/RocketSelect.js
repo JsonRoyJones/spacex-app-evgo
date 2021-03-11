@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-export default function RocketSelect({ rockets }) {
+export default function RocketSelect({ rockets, handleRocketFilter }) {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleSecondOption = e => {
-    setSelectedOption(e);
+    setSelectedOption(e.value);
+    handleRocketFilter(e.value);
   };
 
   const rocketOptions = rockets.map(rocket => {
@@ -19,7 +20,7 @@ export default function RocketSelect({ rockets }) {
       className="basic-single"
       classNamePrefix="select"
       options={rocketOptions}
-      onChange={e => handleSecondOption(e ? e.value : "")}
+      onChange={e => handleSecondOption(e ? e : "")}
     />
   );
 }

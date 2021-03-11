@@ -9,6 +9,8 @@ const SearchContainer = ({
   handleYearFilter,
   rockets,
   missionFilter,
+  rocketFilter,
+  handleRocketFilter,
   handleMissionFilter,
   handleSearchClicked
 }) => {
@@ -48,6 +50,8 @@ const SearchContainer = ({
               yearFilter={yearFilter}
               handleYearFilter={handleYearFilter}
               rockets={rockets}
+              rocketFilter={rocketFilter}
+              handleRocketFilter={handleRocketFilter}
               missionFilter={missionFilter}
               handleMissionFilter={handleMissionFilter}
               handleSearchClicked={handleSearchClicked}
