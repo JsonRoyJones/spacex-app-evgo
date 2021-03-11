@@ -11,11 +11,20 @@ export default function LaunchesAll({
 }) {
   const [launchArr, setLaunchArr] = useState([]);
   let launchData = [];
+  let yearOptions = [];
+  let rocketOptions = [];
+
   useEffect(() => {
     if (launchArr.length < launchData.length) {
       setLaunchArr(launchData);
     }
-  });
+    if (years.length < 1) {
+      handleYears(yearOptions);
+    }
+    if (rockets.length < 1) {
+      handleRockets(rocketOptions);
+    }
+  }, [years.length, rockets.length, launchArr.length]);
 
   const { loading, error, data } = useQuery(LAUNCHES_QUERY);
 
@@ -27,20 +36,15 @@ export default function LaunchesAll({
     );
   if (error) return <p>Something went wrong, please try again.</p>;
   if (data) {
-    // only update this on initial page load to set options for dropdown
     if (years.length < 1) {
-      handleYears(
-        data.launches.map(launch => {
-          return launch.launch_year;
-        })
-      );
+      yearOptions = data.launches.map(launch => {
+        return launch.launch_year;
+      });
     }
     if (rockets.length < 1) {
-      handleRockets(
-        data.launches.map(launch => {
-          return launch.rocket.rocket_name;
-        })
-      );
+      rocketOptions = data.launches.map(launch => {
+        return launch.rocket.rocket_name;
+      });
     }
     launchData = data.launches.map(launch => (
       <LaunchItem

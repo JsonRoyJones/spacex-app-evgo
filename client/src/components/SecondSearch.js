@@ -8,13 +8,22 @@ const SecondSearch = ({
   years,
   yearFilter,
   handleYearFilter,
-  rockets
+  rockets,
+  missionFilter,
+  handleMissionFilter,
+  handleSearchClicked
 }) => {
   const [secondSearchMenu, setSecondSearchMenu] = useState("");
 
   useEffect(() => {
     if (searchOption === "mission_name") {
-      setSecondSearchMenu(<MissionSelect />); // renders text input
+      setSecondSearchMenu(
+        <MissionSelect
+          missionFilter={missionFilter}
+          handleMissionFilter={handleMissionFilter}
+          handleSearchClicked={handleSearchClicked}
+        />
+      ); // renders text input
     } else if (searchOption === "launch_year") {
       setSecondSearchMenu(
         <YearSelect //renders dropdown with years

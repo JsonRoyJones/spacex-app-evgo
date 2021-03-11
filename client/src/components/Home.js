@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import LaunchesContainer from "./LaunchesContainer";
 import MissionKey from "./MissionKey";
 import SearchContainer from "./SearchContainer";
@@ -8,6 +8,8 @@ export default function Launches() {
   const [years, setYears] = useState([]);
   const [yearFilter, setYearFilter] = useState(0);
   const [rockets, setRockets] = useState([]);
+  const [missionFilter, setMissionFilter] = useState("");
+  const [searchClicked, setSearchClicked] = useState(false);
 
   const handleYears = yearArr => {
     const yearSet = new Set(yearArr);
@@ -23,14 +25,19 @@ export default function Launches() {
     setRockets([...rocketSet]);
   };
 
+  const handleMissionFilter = (mission = "tel") => {
+    setMissionFilter(mission);
+    console.log(mission);
+  };
+
+  const handleSearchClicked = () => {
+    setSearchClicked(true);
+  };
+
   const handleQueryChange = query => {
     setQuery(query);
-    console.log("settingQuery with: ", currentQuery);
-    // let { launch_year } = props.match.params;
-    // console.log("in handler for querychange", launch_year);
-    // launch_year = parseInt(launch_year);
-    // setGqlQuery();
   };
+
   return (
     <>
       <br />
@@ -40,8 +47,13 @@ export default function Launches() {
           Use the search bar below to search for SpaceX launches. You may search
           by Mission, Rocket, or Launch Year.
         </h6>
-        <p className="ml-3">
+        <p className="ml-3 mt-0">
           Alternatively, you may scroll through all launches below.
+        </p>
+        <p className="ml-3 mt-0">
+          Please note that mission names are unique as provided by SpaceX API.
+          For best results, use generic search terms such as 'star', 'sat',
+          'tel', etc.
         </p>
         <div className="search-container m-3">
           <SearchContainer
@@ -52,6 +64,9 @@ export default function Launches() {
             handleYears={handleYears}
             rockets={rockets}
             handleRockets={handleRockets}
+            handleMissionFilter={handleMissionFilter}
+            searchClicked={searchClicked}
+            handleSearchClicked={handleSearchClicked}
           />
         </div>
       </div>
@@ -65,6 +80,9 @@ export default function Launches() {
         handleYears={handleYears}
         rockets={rockets}
         handleRockets={handleRockets}
+        missionFilter={missionFilter}
+        handleMissionFilter={handleMissionFilter}
+        searchClicked={searchClicked}
       />
     </>
   );

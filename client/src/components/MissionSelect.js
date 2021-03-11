@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+// import { loadMissionLaunches } from "./MissionLaunches";
 
-export default function MissionSelect() {
+export default function MissionSelect({
+  handleMissionFilter,
+  handleSearchClicked
+}) {
   const [inputVal, setInputVal] = useState("");
   const [isDisabled, setDisabled] = useState(true);
 
@@ -24,11 +28,18 @@ export default function MissionSelect() {
         }}
         className="form-control"
         type="search"
-        placeholder="Type a portion of Mission name to find relevant launches"
+        placeholder="search for any mission names containing this text"
         value={inputVal}
         onChange={onChange}
       />
-      <div className={`btn btn-primary mt-2 ${isDisabled ? "disabled" : ""}`}>
+      <div
+        className={`btn btn-primary mt-2 ${isDisabled ? "disabled" : ""}`}
+        style={{ borderRadius: "4px" }}
+        onClick={() => {
+          handleMissionFilter(inputVal);
+          handleSearchClicked();
+        }}
+      >
         Search
       </div>
     </>

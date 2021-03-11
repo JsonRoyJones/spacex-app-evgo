@@ -7,10 +7,12 @@ const SearchContainer = ({
   years,
   yearFilter,
   handleYearFilter,
-  rockets
+  rockets,
+  missionFilter,
+  handleMissionFilter,
+  handleSearchClicked
 }) => {
   const [searchOption, setSearchOption] = useState("");
-  const [isDisabled, setDisabled] = useState(true);
 
   const options = [
     { value: "mission_name", label: "Mission" },
@@ -18,17 +20,9 @@ const SearchContainer = ({
     { value: "launch_year", label: "Launch Year" }
   ];
 
-  // this tells React which component to load on condition of search category
   const handleFirstOption = val => {
     setSearchOption(val);
-    // if (val === "") {
-    //   setDisabled(true);
-    //   handleQueryChange("launches");
-    // } else {
-    //   setDisabled(false);
-    //   console.log("searchcontainer", val);
     handleQueryChange(val);
-    // }
   };
 
   return (
@@ -54,6 +48,9 @@ const SearchContainer = ({
               yearFilter={yearFilter}
               handleYearFilter={handleYearFilter}
               rockets={rockets}
+              missionFilter={missionFilter}
+              handleMissionFilter={handleMissionFilter}
+              handleSearchClicked={handleSearchClicked}
             />
           </div>
         </form>

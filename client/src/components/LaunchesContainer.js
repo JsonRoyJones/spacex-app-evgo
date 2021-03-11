@@ -1,6 +1,7 @@
 import React from "react";
 import LaunchesAll from "./LaunchesAll";
 import YearLaunches from "./YearLaunches";
+import MissionLaunches from "./MissionLaunches";
 
 export default function LaunchesContainer(
   {
@@ -10,7 +11,10 @@ export default function LaunchesContainer(
     handleYears,
     rockets,
     handleRockets,
-    yearFilter
+    yearFilter,
+    missionFilter,
+    handleMissionFilter,
+    searchClicked
   },
   props
 ) {
@@ -26,6 +30,21 @@ export default function LaunchesContainer(
         handleRockets={handleRockets}
       />
     );
+  } else if (searchClicked && currentQuery === "mission_name") {
+    return [
+      <MissionLaunches
+        currentQuery={currentQuery}
+        handleQueryChange={handleQueryChange}
+        years={years}
+        yearFilter={yearFilter}
+        handleYears={handleYears}
+        rockets={rockets}
+        handleRockets={handleRockets}
+        missionFilter={missionFilter}
+        handleMissionFilter={handleMissionFilter}
+        searchClicked={searchClicked}
+      />
+    ];
   } else {
     return [
       <LaunchesAll
