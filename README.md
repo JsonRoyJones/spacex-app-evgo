@@ -10,7 +10,7 @@ This application wraps SpaceX's REST API with a GraphQL API layer in order to re
 
 # Getting Started
 
-#### Step 1: Clone this repo or a forked version to your local computer
+#### Clone this repo or a forked version to your local computer
 
 In your terminal, navigate to the directory in which you wish to place this folder
 
