@@ -1,4 +1,4 @@
-# EVgo Candidate Jason Jones - SpaceX Launches
+# GraphQL for SpaceX Launches
 
 This application wraps SpaceX's REST API with a GraphQL API layer in order to return requested data to a React client.
 
