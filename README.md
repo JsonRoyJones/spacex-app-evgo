@@ -36,3 +36,5 @@ You should now have a live app. Navigate to http://localhost:3000/ to access the
 You can also interact with the GraphQL server at http://localhost:5000/graphql
 
 If you encounter any errors, please don't hesitate to reach out to me at jasonroyjones@gmail.com
+
+![Web App Screengrab](./web_app_screenshot.png)
