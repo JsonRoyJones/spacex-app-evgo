@@ -28,10 +28,10 @@ git clone https://github.com/JsonRoyJones/spacex-app-evgo
 
    - `cd spacex-app-evgo` and run `npm install`
    - `cd client` and run `npm install`
-   - start the server and the client app in development mode
+   - start the server and the client app in development mode by running `npm run dev`
 
-   ```bash
-   npm run dev
-   ```
+You should now have a live app. Navigate to http://localhost:3000/ to access the web app.
 
-You should now have a live app. If you encounter any errors, please don't hesitate to reach out to me at jasonroyjones@gmail.com
+You can also interact with the GraphQL server at http://localhost:5000/graphql
+
+If you encounter any errors, please don't hesitate to reach out to me at jasonroyjones@gmail.com
