@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import LaunchItem from "./LaunchItem";
 import MISSION_QUERY from "../queries/MISSION_QUERY";
 
