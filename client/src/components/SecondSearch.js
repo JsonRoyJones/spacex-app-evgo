@@ -9,6 +9,8 @@ const SecondSearch = ({
   yearFilter,
   handleYearFilter,
   rockets,
+  rocketFilter,
+  handleRocketFilter,
   missionFilter,
   handleMissionFilter,
   handleSearchClicked
@@ -34,7 +36,13 @@ const SecondSearch = ({
       );
     } else if (searchOption === "rocket_name") {
       // set second search menu with Rocket Select
-      setSecondSearchMenu(<RocketSelect rockets={rockets} />); //renders dropdown
+      setSecondSearchMenu(
+        <RocketSelect
+          rockets={rockets}
+          rocketFilter={rocketFilter}
+          handleRocketFilter={handleRocketFilter}
+        />
+      ); //renders dropdown
     } else setSecondSearchMenu(null);
   }, [searchOption]);
   return <div>{secondSearchMenu}</div>;

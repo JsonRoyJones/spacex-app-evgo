@@ -8,6 +8,7 @@ export default function Launches() {
   const [years, setYears] = useState([]);
   const [yearFilter, setYearFilter] = useState(0);
   const [rockets, setRockets] = useState([]);
+  const [rocketFilter, setRocketFilter] = useState("");
   const [missionFilter, setMissionFilter] = useState("");
   const [searchClicked, setSearchClicked] = useState(false);
 
@@ -25,7 +26,11 @@ export default function Launches() {
     setRockets([...rocketSet]);
   };
 
-  const handleMissionFilter = (mission = "tel") => {
+  const handleRocketFilter = rocketSelected => {
+    setRocketFilter(rocketSelected);
+  };
+
+  const handleMissionFilter = mission => {
     setMissionFilter(mission);
     console.log(mission);
   };
@@ -52,8 +57,8 @@ export default function Launches() {
         </p>
         <p className="ml-3 mt-0">
           Please note that mission names are unique as provided by SpaceX API.
-          For best results, use generic search terms such as 'star', 'sat',
-          'tel', etc.
+          For best results, use generic search terms such as 'star' for
+          Starlink, 'sat', 'tel', etc.
         </p>
         <div className="search-container m-3">
           <SearchContainer
@@ -64,6 +69,8 @@ export default function Launches() {
             handleYears={handleYears}
             rockets={rockets}
             handleRockets={handleRockets}
+            rocketFilter={rocketFilter}
+            handleRocketFilter={handleRocketFilter}
             handleMissionFilter={handleMissionFilter}
             searchClicked={searchClicked}
             handleSearchClicked={handleSearchClicked}
@@ -80,6 +87,8 @@ export default function Launches() {
         handleYears={handleYears}
         rockets={rockets}
         handleRockets={handleRockets}
+        rocketFilter={rocketFilter}
+        handleRocketFilter={handleRocketFilter}
         missionFilter={missionFilter}
         handleMissionFilter={handleMissionFilter}
         searchClicked={searchClicked}

@@ -2,22 +2,21 @@ import React from "react";
 import LaunchesAll from "./LaunchesAll";
 import YearLaunches from "./YearLaunches";
 import MissionLaunches from "./MissionLaunches";
+import RocketLaunches from "./RocketLaunches";
 
-export default function LaunchesContainer(
-  {
-    currentQuery,
-    handleQueryChange,
-    years,
-    handleYears,
-    rockets,
-    handleRockets,
-    yearFilter,
-    missionFilter,
-    handleMissionFilter,
-    searchClicked
-  },
-  props
-) {
+export default function LaunchesContainer({
+  currentQuery,
+  handleQueryChange,
+  years,
+  handleYears,
+  rockets,
+  handleRockets,
+  yearFilter,
+  missionFilter,
+  rocketFilter,
+  handleMissionFilter,
+  searchClicked
+}) {
   if (currentQuery === "launch_year" && yearFilter !== 0) {
     return (
       <YearLaunches
@@ -30,8 +29,24 @@ export default function LaunchesContainer(
         handleRockets={handleRockets}
       />
     );
+  } else if (currentQuery === "rocket_name" && rocketFilter !== "") {
+    return (
+      <RocketLaunches
+        currentQuery={currentQuery}
+        handleQueryChange={handleQueryChange}
+        years={years}
+        yearFilter={yearFilter}
+        handleYears={handleYears}
+        rockets={rockets}
+        handleRockets={handleRockets}
+        rocketFilter={rocketFilter}
+        missionFilter={missionFilter}
+        handleMissionFilter={handleMissionFilter}
+        searchClicked={searchClicked}
+      />
+    );
   } else if (searchClicked && currentQuery === "mission_name") {
-    return [
+    return (
       <MissionLaunches
         currentQuery={currentQuery}
         handleQueryChange={handleQueryChange}
@@ -44,9 +59,9 @@ export default function LaunchesContainer(
         handleMissionFilter={handleMissionFilter}
         searchClicked={searchClicked}
       />
-    ];
+    );
   } else {
-    return [
+    return (
       <LaunchesAll
         currentQuery={currentQuery}
         handleQueryChange={handleQueryChange}
@@ -56,14 +71,6 @@ export default function LaunchesContainer(
         rockets={rockets}
         handleRockets={handleRockets}
       />
-    ];
+    );
   }
-
-  // return (
-  //   <div>
-  //     // render initial component for LaunchesAll default but if year or rocket
-  //     selected, render a different component
-  //     <LaunchesContainer />
-  //   </div>
-  // );
 }
