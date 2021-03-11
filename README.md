@@ -2,7 +2,7 @@
 
 This application wraps SpaceX's REST API with a GraphQL API layer in order to return requested data to a React client.
 
-## Technologies
+## Core Technologies
 
 - [React](https://reactjs.org/docs/getting-started.html)
 - [Node](https://nodejs.org/en/) / [Express](https://expressjs.com/en/starter/installing.html)
