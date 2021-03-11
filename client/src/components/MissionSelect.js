@@ -2,9 +2,15 @@ import React, { useState } from "react";
 
 export default function MissionSelect() {
   const [inputVal, setInputVal] = useState("");
+  const [isDisabled, setDisabled] = useState(true);
 
   const onChange = e => {
     setInputVal(e.target.value);
+    if (e.target.value !== "") {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   };
 
   return (
@@ -22,6 +28,9 @@ export default function MissionSelect() {
         value={inputVal}
         onChange={onChange}
       />
+      <div className={`btn btn-primary mt-2 ${isDisabled ? "disabled" : ""}`}>
+        Search
+      </div>
     </>
   );
 }

@@ -21,14 +21,14 @@ const SearchContainer = ({
   // this tells React which component to load on condition of search category
   const handleFirstOption = val => {
     setSearchOption(val);
-    if (val === "") {
-      setDisabled(true);
-      handleQueryChange("launches");
-    } else {
-      setDisabled(false);
-      console.log("searchcontainer", val);
-      handleQueryChange(val);
-    }
+    // if (val === "") {
+    //   setDisabled(true);
+    //   handleQueryChange("launches");
+    // } else {
+    //   setDisabled(false);
+    //   console.log("searchcontainer", val);
+    handleQueryChange(val);
+    // }
   };
 
   return (
@@ -55,11 +55,6 @@ const SearchContainer = ({
               handleYearFilter={handleYearFilter}
               rockets={rockets}
             />
-          </div>
-          <div
-            className={`btn btn-primary m-0 ${isDisabled ? "disabled" : ""}`}
-          >
-            Search
           </div>
         </form>
       </div>
