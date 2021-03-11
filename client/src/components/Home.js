@@ -32,7 +32,6 @@ export default function Launches() {
 
   const handleMissionFilter = mission => {
     setMissionFilter(mission);
-    console.log(mission);
   };
 
   const handleSearchClicked = () => {
