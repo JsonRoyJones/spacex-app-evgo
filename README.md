@@ -28,10 +28,6 @@ git clone https://github.com/JsonRoyJones/spacex-app-evgo
 
    - `cd spacex-app-evgo` and run `npm install`
    - `cd client` and run `npm install`
-   - start the server and the client app in development mode
-
-   ```bash
-   npm run dev
-   ```
+   - start the server and the client app in development mode with `npm run dev`
 
 You should now have a live app. If you encounter any errors, please don't hesitate to reach out to me at jasonroyjones@gmail.com
