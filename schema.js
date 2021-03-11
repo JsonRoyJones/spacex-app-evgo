@@ -46,6 +46,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     launches: {
       type: new GraphQLList(LaunchType),
+      args: { launch_year: { type: GraphQLInt } },
       resolve(parent, args) {
         return axios
           .get("https://api.spacexdata.com/v3/launches")
@@ -126,7 +127,8 @@ const RootQuery = new GraphQLObjectType({
             res.data.filter(
               launchItem => launchItem.launch_year == args.launch_year
             )
-          );
+          )
+          .catch(error => console.log(error));
       }
     }
   }
