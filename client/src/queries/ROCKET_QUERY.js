@@ -2,7 +2,7 @@ import { gql } from "apollo-boost";
 
 export default gql`
   query RocketQuery($rocket_name: String!) {
-    rocketLaunches(lrocket_name: $rocket_name) {
+    rocketLaunches(rocket_name: $rocket_name) {
       flight_number
       mission_name
       rocket {

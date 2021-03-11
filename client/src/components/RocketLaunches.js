@@ -23,11 +23,12 @@ export default function LaunchesAll({ rocketFilter }) {
   if (loading)
     return (
       <div className="loading">
-        <h4>Launches From Year {rocketFilter} Loading...</h4>
+        <h4>Launches with {rocketFilter} Rockets Loading...</h4>
       </div>
     );
   if (error) {
     console.log(error);
+    console.log(rocketFilter);
     return <p>Something went wrong, please try again.</p>;
   }
   if (data) {
